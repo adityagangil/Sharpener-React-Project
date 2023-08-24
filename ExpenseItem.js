@@ -1,12 +1,38 @@
-function ExpenseItem() {
+import React, {useState} from 'react';
+import './ExpenseItem.css';
+import ExpenseDate from './ExpenseDate';
+import Card from '../UI/Card';
+
+const ExpenseItem = (props) => {
+    const [title, setTitle] = useState(props.title);
+    const [amount, setAmount] = useState(props.amount);
+    // console.log("ExpenseItem Evaluated by React");
+
+    const clickHandler = () => {
+        setTitle('Updated');
+        console.log(title);
+    }
+    const amountHandler = () => {
+        setAmount('100$');
+        console.log(amount);
+    }
+    
+    // const deleteHandler = () => {
+    //     console.log('Deleted!!!!')
+    // }
+
     return (
-        <div>
-            <div><h1>Expense Items</h1></div>
-            <h3>Food Rs 10</h3>
-            <h3>Petrol Rs 100</h3>
-            <h3>Movies Rs 200</h3>
-        </div>
+        <Card className="expense-item">
+            <ExpenseDate date={props.date}/>
+            <div className = 'expense-item__description'>
+                <h2>{props.title}</h2>
+                {/* <button onClick={deleteHandler}>Delete Expense</button> */}
+                <button onClick={amountHandler}>Change Amount</button>
+                <div className='expense-item__price'>{props.amount}</div>
+            </div>
+            <button onClick={clickHandler}>Change Title</button>
+        </Card>
     );
 }
 
-export default ExpenseItem 
+export default ExpenseItem;
